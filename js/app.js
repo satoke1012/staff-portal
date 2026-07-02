@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", render);
   render();
@@ -7,7 +8,7 @@ function render() {
   const content = document.querySelector(".content");
   const route = location.hash || "#home";
 
-  /* 🔥 フェードアウト */
+  /* ① フェードアウト */
   content.classList.add("fade-out");
 
   setTimeout(() => {
@@ -75,7 +76,10 @@ function render() {
 
     content.innerHTML = html;
 
-    /* 🔥 フェードイン */
+    /* 🔥 ここが重要：強制リフロー */
+    content.offsetHeight;
+
+    /* ② フェードイン */
     content.classList.remove("fade-out");
     content.classList.add("fade-in");
 
