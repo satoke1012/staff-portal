@@ -1,18 +1,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", render);
-
-  render(); // 初回
+  render();
 });
 
 function render() {
   const content = document.querySelector(".content");
-
-  if (!content) {
-    console.error("contentが見つからない");
-    return;
-  }
-
   const route = location.hash || "#home";
 
   let html = "";
@@ -22,7 +15,6 @@ function render() {
     case "#notices":
       html = `
         <h1>お知らせ</h1>
-        <p>最新情報一覧</p>
 
         <div class="notice-grid">
           <div class="notice-card">メンテナンス情報</div>
@@ -35,12 +27,10 @@ function render() {
       html = `
         <h1>問い合わせ</h1>
 
-        <div class="welcome-card">
-          <input placeholder="名前">
-          <input placeholder="件名">
-          <textarea placeholder="内容"></textarea>
-          <button>送信</button>
-        </div>
+        <input placeholder="名前">
+        <input placeholder="件名">
+        <textarea placeholder="内容"></textarea>
+        <button>送信</button>
       `;
       break;
 
@@ -67,11 +57,10 @@ function render() {
       `;
       break;
 
-    case "#home":
     default:
       html = `
-        <h1>ようこそ！</h1>
-        <p>Staff Portalへようこそ。</p>
+        <h1>ホーム</h1>
+        <p>Staff Portalへようこそ</p>
 
         <div class="notice-card">
           ダッシュボード
@@ -86,13 +75,10 @@ function render() {
 }
 
 function setActive(route) {
-  const links = document.querySelectorAll(".sidebar nav a");
-
-  links.forEach(link => {
-    link.classList.remove("active");
-
-    if (link.getAttribute("href") === route) {
-      link.classList.add("active");
+  document.querySelectorAll(".sidebar nav a").forEach(a => {
+    a.classList.remove("active");
+    if (a.getAttribute("href") === route) {
+      a.classList.add("active");
     }
   });
 }
