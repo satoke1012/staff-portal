@@ -1,4 +1,3 @@
-/* 全体リセット */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +10,6 @@ body {
   color: #333;
 }
 
-/* ヘッダー */
 .header {
   background: #2c3e50;
   color: #fff;
@@ -28,14 +26,12 @@ body {
   opacity: 0.8;
 }
 
-/* コンテナ */
 .container {
   max-width: 900px;
   margin: 20px auto;
   padding: 0 15px;
 }
 
-/* セクション共通 */
 section {
   background: #fff;
   padding: 15px;
@@ -44,7 +40,6 @@ section {
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* フォーム */
 .post-form input,
 .post-form textarea {
   width: 100%;
@@ -68,14 +63,12 @@ section {
   padding: 10px 15px;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .post-form button:hover {
   background: #2980b9;
 }
 
-/* 投稿一覧 */
 .posts h2 {
   margin-bottom: 10px;
 }
