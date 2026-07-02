@@ -250,3 +250,25 @@ button:hover {
         padding: 20px;
     }
 }
+
+/* =====================================================
+   SPA Transition FX
+===================================================== */
+
+/* コンテンツ切替アニメ */
+.content {
+    opacity: 1;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* フェードアウト */
+.content.is-leaving {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+/* フェードイン準備 */
+.content.is-entering {
+    opacity: 0;
+    transform: translateY(-6px);
+}
