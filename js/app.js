@@ -8,7 +8,6 @@ function render() {
   const content = document.querySelector(".content");
   const route = location.hash || "#home";
 
-  /* ① フェードアウト */
   content.classList.add("fade-out");
 
   setTimeout(() => {
@@ -18,85 +17,37 @@ function render() {
     switch (route) {
 
       case "#notices":
-        html = `
-          <h1>お知らせ</h1>
-
-          <div class="notice-grid">
-            <div class="notice-card">メンテナンス情報</div>
-            <div class="notice-card">提出期限リマインド</div>
-          </div>
-        `;
+        html = `<h1>お知らせ</h1>`;
         break;
 
       case "#support":
-        html = `
-          <h1>問い合わせ</h1>
-
-          <input placeholder="名前">
-          <input placeholder="件名">
-          <textarea placeholder="内容"></textarea>
-          <button>送信</button>
-        `;
+        html = `<h1>問い合わせ</h1>`;
         break;
 
       case "#status":
-        html = `
-          <h1>対応状況</h1>
-
-          <div class="notice-grid">
-            <div class="notice-card">対応中</div>
-            <div class="notice-card">未対応</div>
-            <div class="notice-card">完了</div>
-          </div>
-        `;
+        html = `<h1>対応状況</h1>`;
         break;
 
       case "#files":
-        html = `
-          <h1>ファイル共有</h1>
-
-          <div class="notice-grid">
-            <div class="notice-card">月次報告書.xlsx</div>
-            <div class="notice-card">マニュアル.pdf</div>
-          </div>
-        `;
+        html = `<h1>ファイル共有</h1>`;
         break;
 
       default:
-        html = `
-          <h1>ホーム</h1>
-          <p>Staff Portalへようこそ</p>
-
-          <div class="notice-card">
-            ダッシュボード
-          </div>
-        `;
+        html = `<h1>ホーム</h1>`;
         break;
     }
 
     content.innerHTML = html;
 
-    /* 🔥 ここが重要：強制リフロー */
-    content.offsetHeight;
-
-    /* ② フェードイン */
     content.classList.remove("fade-out");
-    content.classList.add("fade-in");
-
-    requestAnimationFrame(() => {
-      content.classList.remove("fade-in");
-    });
 
     setActive(route);
 
-  }, 180);
+  }, 150);
 }
 
 function setActive(route) {
   document.querySelectorAll(".sidebar nav a").forEach(a => {
-    a.classList.remove("active");
-    if (a.getAttribute("href") === route) {
-      a.classList.add("active");
-    }
+    a.classList.toggle("active", a.getAttribute("href") === route);
   });
 }
