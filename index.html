@@ -2,79 +2,56 @@
 <html lang="ja">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Staff Portal</title>
 
-  <!-- Google Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
 <div class="layout">
 
-  <!-- サイドバー -->
   <aside class="sidebar">
 
     <div class="logo">
       <h2>Staff Portal</h2>
-      <span>Ver.0.5 SPA</span>
+      <span>SPA</span>
     </div>
 
     <nav>
-
-      <!-- SPAなので全部 hashリンク -->
       <a href="#home" class="active">
-        <span class="material-symbols-outlined">home</span>
-        <span>ホーム</span>
+        <span class="material-symbols-outlined">home</span>ホーム
       </a>
 
       <a href="#notices">
-        <span class="material-symbols-outlined">campaign</span>
-        <span>お知らせ</span>
+        <span class="material-symbols-outlined">campaign</span>お知らせ
       </a>
 
       <a href="#support">
-        <span class="material-symbols-outlined">support_agent</span>
-        <span>問い合わせ</span>
+        <span class="material-symbols-outlined">support_agent</span>問い合わせ
       </a>
 
       <a href="#status">
-        <span class="material-symbols-outlined">assignment</span>
-        <span>対応状況</span>
+        <span class="material-symbols-outlined">assignment</span>対応状況
       </a>
 
       <a href="#files">
-        <span class="material-symbols-outlined">folder</span>
-        <span>ファイル共有</span>
+        <span class="material-symbols-outlined">folder</span>ファイル共有
       </a>
-
     </nav>
 
   </aside>
 
-  <!-- メイン（JSで全部ここ書き換え） -->
   <main class="content">
-    <!-- 初期表示（JSで上書きされる） -->
     <h1>読み込み中...</h1>
-    <p>しばらくお待ちください</p>
   </main>
 
 </div>
 
-<!-- SPA本体 -->
 <script src="js/app.js"></script>
 
 </body>
-
 </html>
