@@ -1,31 +1,67 @@
-// ==============================
-// Staff Portal
-// app.js
-// ==============================
+/* =========================
+   掲示板ロジック
+   localStorage版
+========================= */
 
-console.log("Staff Portal 起動");
+const STORAGE_KEY = "bbs_posts";
 
-// アプリ初期化
-document.addEventListener("DOMContentLoaded", () => {
+// 投稿する
+function postMessage() {
+  const nameEl = document.getElementById("name");
+  const msgEl = document.getElementById("message");
 
-    console.log("画面を読み込みました");
+  const name = nameEl.value.trim() || "名無し";
+  const message = msgEl.value.trim();
 
-    init();
+  if (!message) return;
 
-});
+  const post = {
+    name,
+    message,
+    time: new Date().toLocaleString("ja-JP")
+  };
 
-// 初期処理
-function init() {
+  const posts = getPosts();
+  posts.unshift(post);
 
-    setVersion();
+  savePosts(posts);
+  renderPosts();
 
+  msgEl.value = "";
 }
 
-// バージョン表示
-function setVersion() {
-
-    const version = "Ver.1.0.0";
-
-    console.log(version);
-
+// 投稿取得
+function getPosts() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 }
+
+// 保存
+function savePosts(posts) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+}
+
+// 表示
+function renderPosts() {
+  const postList = document.getElementById("postList");
+  const posts = getPosts();
+
+  postList.innerHTML = posts.map((p, i) => `
+    <div class="post">
+      <div class="meta">
+        #${posts.length - i} / ${p.name} / ${p.time}
+      </div>
+      <div class="text">${escapeHtml(p.message)}</div>
+    </div>
+  `).join("");
+}
+
+// HTMLエスケープ（最低限の安全対策）
+function escapeHtml(str) {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+// 初期表示
+document.addEventListener("DOMContentLoaded", renderPosts);
