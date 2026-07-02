@@ -1,157 +1,252 @@
+
 /* =====================================================
-   Staff Portal
-   Version 0.3
+   Staff Portal UI Upgrade
+   Ver 0.4 (Dashboard Style)
 ===================================================== */
 
-/* ---------- リセット ---------- */
+/* ---------- Reset ---------- */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Yu Gothic UI", "Meiryo", sans-serif;
 }
 
-/* ---------- 全体 ---------- */
+/* ---------- Base ---------- */
 
 body {
-    font-family: "Yu Gothic UI", "Meiryo", sans-serif;
-    background: #f4f6f9;
-    color: #333;
+    background: #f3f6fb;
+    color: #1f2937;
 }
 
-/* ---------- レイアウト ---------- */
+/* ---------- Layout ---------- */
 
 .layout {
     display: flex;
     min-height: 100vh;
 }
 
-/* ---------- サイドバー ---------- */
+/* ---------- Sidebar ---------- */
 
 .sidebar {
-    width: 250px;
-    background: #1f2937;
-    color: white;
-    padding: 30px 20px;
+    width: 260px;
+    background: #111827;
+    color: #fff;
+    padding: 28px 18px;
 }
 
-/* ---------- ロゴ ---------- */
-
 .logo {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
 .logo h2 {
-    font-size: 28px;
-    margin-bottom: 5px;
+    font-size: 22px;
+    letter-spacing: 0.5px;
 }
 
 .logo span {
-    color: #cbd5e1;
-    font-size: 14px;
+    font-size: 12px;
+    color: #9ca3af;
 }
 
-/* ---------- メニュー ---------- */
+/* nav */
 
 .sidebar nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .sidebar nav a {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 
-    padding: 12px 15px;
-
-    color: white;
-    text-decoration: none;
-
+    padding: 11px 12px;
     border-radius: 10px;
 
-    transition: .2s;
+    color: #d1d5db;
+    text-decoration: none;
+
+    transition: 0.2s;
 }
 
 .sidebar nav a:hover {
-    background: #374151;
+    background: #1f2937;
+    color: #fff;
 }
 
 .sidebar nav a.active {
     background: #2563eb;
+    color: #fff;
 }
 
-/* ---------- アイコン ---------- */
+/* icon */
 
 .material-symbols-outlined {
-    font-size: 22px;
+    font-size: 20px;
 }
 
-/* ---------- メイン ---------- */
+/* ---------- Content ---------- */
 
 .content {
     flex: 1;
-    padding: 50px;
+    padding: 40px;
 }
 
+/* titles */
+
 .content h1 {
-    margin-bottom: 20px;
-    font-size: 36px;
+    font-size: 28px;
+    margin-bottom: 6px;
 }
 
 .content p {
-    color: #666;
+    color: #6b7280;
+    margin-bottom: 24px;
 }
 
-/* ---------- カード ---------- */
+/* ---------- Grid ---------- */
 
-.welcome-card {
-
-    margin-top: 40px;
-
-    background: white;
-
-    border-radius: 12px;
-
-    padding: 30px;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-
+.notice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
 }
 
-.welcome-card h2 {
+/* ---------- Card ---------- */
 
-    margin-bottom: 15px;
+.notice-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
 
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+    transition: 0.2s;
 }
 
-.welcome-card p {
-
-    line-height: 1.8;
-
+.notice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* ---------- スマホ ---------- */
-
-@media (max-width:768px){
-
-.layout{
-
-    flex-direction:column;
-
+.notice-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
 }
 
-.sidebar{
-
-    width:100%;
-
+.notice-card p {
+    font-size: 13px;
+    color: #4b5563;
 }
 
-.content{
+/* ---------- Status Colors ---------- */
 
-    padding:30px;
-
+.notice-card.high {
+    border-left: 4px solid #ef4444;
 }
 
+.notice-card.medium {
+    border-left: 4px solid #f59e0b;
+}
+
+.notice-card.low {
+    border-left: 4px solid #10b981;
+}
+
+/* ---------- Badge ---------- */
+
+.badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-left: auto;
+}
+
+.badge.high {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.badge.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge.low {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+/* ---------- Card header ---------- */
+
+.notice-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* ---------- Time ---------- */
+
+.notice-time {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* ---------- Form系 ---------- */
+
+input, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus, textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+
+    padding: 10px 14px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 768px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .content {
+        padding: 20px;
+    }
 }
