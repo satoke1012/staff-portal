@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ | Staff Portal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- サイドバー -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <h2>Staff Portal</h2>
+      <span>Ver.0.3</span>
+    </div>
+
+    <nav>
+      <a href="../index.html">
+        <span class="material-symbols-outlined">home</span>
+        <span>ホーム</span>
+      </a>
+
+      <a href="notices.html" class="active">
+        <span class="material-symbols-outlined">campaign</span>
+        <span>お知らせ</span>
+      </a>
+
+      <a href="support.html">
+        <span class="material-symbols-outlined">support_agent</span>
+        <span>問い合わせ</span>
+      </a>
+
+      <a href="status.html">
+        <span class="material-symbols-outlined">assignment</span>
+        <span>対応状況</span>
+      </a>
+
+      <a href="files.html">
+        <span class="material-symbols-outlined">folder</span>
+        <span>ファイル共有</span>
+      </a>
+    </nav>
+
+  </aside>
+
+  <!-- メイン -->
+  <main class="content">
+
+    <h1>お知らせ</h1>
+    <p>最新の連絡事項一覧</p>
+
+    <div class="notice-grid">
+
+      <div class="notice-card high">
+        <div class="notice-header">
+          <h3>システムメンテナンス</h3>
+          <span class="badge high">重要</span>
+        </div>
+        <p>本日22:00〜23:00にメンテナンスがあります。</p>
+        <div class="notice-time">2026/07/02</div>
+      </div>
+
+      <div class="notice-card medium">
+        <div class="notice-header">
+          <h3>提出期限リマインド</h3>
+          <span class="badge medium">通常</span>
+        </div>
+        <p>月次レポートの提出期限は明日です。</p>
+        <div class="notice-time">2026/07/02</div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+</body>
+</html>
