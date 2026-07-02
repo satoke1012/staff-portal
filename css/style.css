@@ -1,7 +1,9 @@
-/* ==========================
+/* =====================================================
    Staff Portal
-   style.css
-========================== */
+   Version 0.2
+===================================================== */
+
+/* ---------- リセット ---------- */
 
 * {
     margin: 0;
@@ -9,194 +11,169 @@
     box-sizing: border-box;
 }
 
+/* ---------- 全体 ---------- */
+
 body {
     font-family: "Yu Gothic UI", "Meiryo", sans-serif;
-    background: #f5f7fa;
+    background: #f3f5f9;
     color: #333;
 }
 
-/* ===== ヘッダー ===== */
+/* ---------- レイアウト ---------- */
 
-header {
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------- サイドバー ---------- */
+
+.sidebar {
+
+    width: 250px;
+
     background: #ffffff;
-    padding: 24px 40px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-}
 
-header h1 {
-    font-size: 32px;
-}
-
-header p {
-    color: #666;
-    margin-top: 6px;
-}
-
-/* ===== メイン ===== */
-
-main {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-    gap: 25px;
-}
-
-/* ===== カード ===== */
-
-.card {
-
-    background: white;
-
-    border-radius: 14px;
+    border-right: 1px solid #dcdfe5;
 
     padding: 25px;
 
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+/* ---------- ロゴ ---------- */
+
+.logo {
+
+    margin-bottom: 40px;
+
+}
+
+.logo h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 5px;
+
+}
+
+.logo span {
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+/* ---------- メニュー ---------- */
+
+.sidebar nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+.sidebar nav a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 15px;
+
+    color: #333;
+
     text-decoration: none;
 
-    color: inherit;
+    border-radius: 10px;
 
-    box-shadow: 0 6px 18px rgba(0,0,0,.08);
-
-    transition: .2s;
-}
-
-.card:hover{
-
-    transform: translateY(-5px);
-
-    box-shadow: 0 12px 25px rgba(0,0,0,.12);
+    transition: 0.2s;
 
 }
 
-.card h2{
+.sidebar nav a:hover {
 
-    font-size:24px;
-
-    margin-bottom:15px;
+    background: #edf2ff;
 
 }
 
-.card p{
+.sidebar nav a.active {
 
-    color:#666;
+    background: #2f6fed;
 
-    line-height:1.6;
-
-}
-
-/* ===== スマホ ===== */
-
-@media (max-width:768px){
-
-header{
-
-padding:20px;
+    color: white;
 
 }
 
-header h1{
+/* ---------- Material Icons ---------- */
 
-font-size:26px;
-
-}
-
-}
 .material-symbols-outlined {
-    font-size: 24px;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-/* ==========================
-   レイアウト
-========================== */
 
-.layout{
+    font-size: 22px;
 
-    display:flex;
-
-    min-height:100vh;
+    user-select: none;
 
 }
 
-/* サイドバー */
+/* ---------- メイン ---------- */
 
-.sidebar{
+.content {
 
-    width:250px;
+    flex: 1;
 
-    background:#ffffff;
-
-    border-right:1px solid #e5e7eb;
-
-    padding:30px;
+    padding: 50px;
 
 }
 
-.logo{
+.content h1 {
 
-    margin-bottom:40px;
+    font-size: 34px;
 
-}
-
-.logo h2{
-
-    margin-bottom:5px;
+    margin-bottom: 25px;
 
 }
 
-.logo span{
+.content p {
 
-    color:#888;
+    line-height: 1.8;
 
-    font-size:14px;
-
-}
-
-.sidebar nav{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
+    color: #555;
 
 }
 
-.sidebar nav a{
+/* ---------- スマホ ---------- */
 
-    display:flex;
+@media (max-width: 768px) {
 
-    align-items:center;
+    .layout {
 
-    gap:10px;
+        flex-direction: column;
 
-    text-decoration:none;
+    }
 
-    color:#333;
+    .sidebar {
 
-    padding:12px;
+        width: 100%;
 
-    border-radius:10px;
+        border-right: none;
 
-    transition:.2s;
+        border-bottom: 1px solid #ddd;
 
-}
+    }
 
-.sidebar nav a:hover{
+    .content {
 
-    background:#f3f4f6;
+        padding: 25px;
 
-}
-
-/* コンテンツ */
-
-.content{
-
-    flex:1;
-
-    padding:40px;
+    }
 
 }
