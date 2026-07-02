@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -74,10 +73,23 @@ body {
 .content {
   flex: 1;
   padding: 40px;
+
+  /* 🔥 アニメ追加 */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-h1 {
-  margin-bottom: 20px;
+/* フェードアウト */
+.content.fade-out {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* フェードイン準備 */
+.content.fade-in {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
 /* cards */
