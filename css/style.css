@@ -1,6 +1,6 @@
 /* =====================================================
    Staff Portal
-   Version 0.2
+   Version 0.3
 ===================================================== */
 
 /* ---------- リセット ---------- */
@@ -15,7 +15,7 @@
 
 body {
     font-family: "Yu Gothic UI", "Meiryo", sans-serif;
-    background: #f3f5f9;
+    background: #f4f6f9;
     color: #333;
 }
 
@@ -29,151 +29,129 @@ body {
 /* ---------- サイドバー ---------- */
 
 .sidebar {
-
     width: 250px;
-
-    background: #ffffff;
-
-    border-right: 1px solid #dcdfe5;
-
-    padding: 25px;
-
-    display: flex;
-
-    flex-direction: column;
-
+    background: #1f2937;
+    color: white;
+    padding: 30px 20px;
 }
 
 /* ---------- ロゴ ---------- */
 
 .logo {
-
     margin-bottom: 40px;
-
 }
 
 .logo h2 {
-
     font-size: 28px;
-
     margin-bottom: 5px;
-
 }
 
 .logo span {
-
-    color: #777;
-
+    color: #cbd5e1;
     font-size: 14px;
-
 }
 
 /* ---------- メニュー ---------- */
 
 .sidebar nav {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 8px;
-
 }
 
 .sidebar nav a {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 
     padding: 12px 15px;
 
-    color: #333;
-
+    color: white;
     text-decoration: none;
 
     border-radius: 10px;
 
-    transition: 0.2s;
-
+    transition: .2s;
 }
 
 .sidebar nav a:hover {
-
-    background: #edf2ff;
-
+    background: #374151;
 }
 
 .sidebar nav a.active {
-
-    background: #2f6fed;
-
-    color: white;
-
+    background: #2563eb;
 }
 
-/* ---------- Material Icons ---------- */
+/* ---------- アイコン ---------- */
 
 .material-symbols-outlined {
-
     font-size: 22px;
-
-    user-select: none;
-
 }
 
 /* ---------- メイン ---------- */
 
 .content {
-
     flex: 1;
-
     padding: 50px;
-
 }
 
 .content h1 {
-
-    font-size: 34px;
-
-    margin-bottom: 25px;
-
+    margin-bottom: 20px;
+    font-size: 36px;
 }
 
 .content p {
+    color: #666;
+}
+
+/* ---------- カード ---------- */
+
+.welcome-card {
+
+    margin-top: 40px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 30px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.welcome-card h2 {
+
+    margin-bottom: 15px;
+
+}
+
+.welcome-card p {
 
     line-height: 1.8;
-
-    color: #555;
 
 }
 
 /* ---------- スマホ ---------- */
 
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-    .layout {
+.layout{
 
-        flex-direction: column;
+    flex-direction:column;
 
-    }
+}
 
-    .sidebar {
+.sidebar{
 
-        width: 100%;
+    width:100%;
 
-        border-right: none;
+}
 
-        border-bottom: 1px solid #ddd;
+.content{
 
-    }
+    padding:30px;
 
-    .content {
-
-        padding: 25px;
-
-    }
+}
 
 }
