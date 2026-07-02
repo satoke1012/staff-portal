@@ -15,6 +15,7 @@
 
   <main class="container">
 
+    <!-- 投稿フォーム -->
     <section class="post-form">
       <h2>投稿する</h2>
 
@@ -24,6 +25,7 @@
       <button onclick="postMessage()">投稿</button>
     </section>
 
+    <!-- 投稿一覧 -->
     <section class="posts">
       <h2>投稿一覧</h2>
       <div id="postList"></div>
@@ -31,6 +33,42 @@
 
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    // とりあえずローカル保存版（後でAPI化できる）
+    function postMessage() {
+      const name = document.getElementById("name").value || "名無し";
+      const message = document.getElementById("message").value;
+
+      if (!message) return;
+
+      const post = {
+        name,
+        message,
+        time: new Date().toLocaleString()
+      };
+
+      let posts = JSON.parse(localStorage.getItem("posts") || "[]");
+      posts.unshift(post);
+      localStorage.setItem("posts", JSON.stringify(posts));
+
+      renderPosts();
+      document.getElementById("message").value = "";
+    }
+
+    function renderPosts() {
+      const postList = document.getElementById("postList");
+      const posts = JSON.parse(localStorage.getItem("posts") || "[]");
+
+      postList.innerHTML = posts.map(p => `
+        <div class="post">
+          <div class="meta">${p.name} / ${p.time}</div>
+          <div class="text">${p.message}</div>
+        </div>
+      `).join("");
+    }
+
+    renderPosts();
+  </script>
+
 </body>
 </html>
