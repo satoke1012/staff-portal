@@ -1,16 +1,8 @@
 
-/* =====================================================
-   Staff Portal SPA
-   Ver 0.5
-   - 疑似SPA（ページ遷移なし）
-===================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
   initRouter();
-  render(location.hash || "#home");
+  render(location.hash || "#home", true);
 });
-
-/* ---------- ルーティング ---------- */
 
 function initRouter() {
   window.addEventListener("hashchange", () => {
@@ -18,36 +10,57 @@ function initRouter() {
   });
 }
 
-/* ---------- 画面切り替え ---------- */
-
-function render(route) {
+function render(route, first = false) {
   const content = document.querySelector(".content");
 
   setActiveMenu(route);
 
+  // 初回はアニメなし
+  if (first) {
+    content.innerHTML = getPage(route);
+    return;
+  }
+
+  // フェードアウト
+  content.classList.add("is-leaving");
+
+  setTimeout(() => {
+    // 中身差し替え
+    content.innerHTML = getPage(route);
+
+    // フェードイン準備
+    content.classList.remove("is-leaving");
+    content.classList.add("is-entering");
+
+    requestAnimationFrame(() => {
+      content.classList.remove("is-entering");
+    });
+
+  }, 180);
+}
+
+/* ---------- ルーティング ---------- */
+
+function getPage(route) {
   switch (route) {
     case "#notices":
-      content.innerHTML = noticesPage();
-      break;
+      return noticesPage();
 
     case "#support":
-      content.innerHTML = supportPage();
-      break;
+      return supportPage();
 
     case "#status":
-      content.innerHTML = statusPage();
-      break;
+      return statusPage();
 
     case "#files":
-      content.innerHTML = filesPage();
-      break;
+      return filesPage();
 
     default:
-      content.innerHTML = homePage();
+      return homePage();
   }
 }
 
-/* ---------- ホーム ---------- */
+/* ---------- pages ---------- */
 
 function homePage() {
   return `
@@ -57,13 +70,11 @@ function homePage() {
     <div class="notice-grid">
       <div class="notice-card">
         <h3>ダッシュボード</h3>
-        <p>ここに最新情報が表示されます。</p>
+        <p>最新情報がここに表示されます</p>
       </div>
     </div>
   `;
 }
-
-/* ---------- お知らせ ---------- */
 
 function noticesPage() {
   return `
@@ -71,7 +82,6 @@ function noticesPage() {
     <p>最新の連絡事項</p>
 
     <div class="notice-grid">
-
       <div class="notice-card high">
         <h3>システムメンテナンス</h3>
         <p>本日22:00〜実施</p>
@@ -81,12 +91,9 @@ function noticesPage() {
         <h3>提出期限</h3>
         <p>明日まで</p>
       </div>
-
     </div>
   `;
 }
-
-/* ---------- 問い合わせ ---------- */
 
 function supportPage() {
   return `
@@ -96,13 +103,10 @@ function supportPage() {
       <input placeholder="名前">
       <input placeholder="件名">
       <textarea placeholder="内容"></textarea>
-
       <button>送信</button>
     </div>
   `;
 }
-
-/* ---------- 対応状況 ---------- */
 
 function statusPage() {
   return `
@@ -116,8 +120,6 @@ function statusPage() {
   `;
 }
 
-/* ---------- ファイル共有 ---------- */
-
 function filesPage() {
   return `
     <h1>ファイル共有</h1>
@@ -130,7 +132,7 @@ function filesPage() {
   `;
 }
 
-/* ---------- メニュー状態 ---------- */
+/* ---------- active管理 ---------- */
 
 function setActiveMenu(route) {
   const links = document.querySelectorAll(".sidebar nav a");
@@ -140,10 +142,10 @@ function setActiveMenu(route) {
 
     if (
       (route === "#home" && link.getAttribute("href") === "#home") ||
-      (route === "#notices" && link.textContent.includes("お知らせ")) ||
-      (route === "#support" && link.textContent.includes("問い合わせ")) ||
-      (route === "#status" && link.textContent.includes("対応状況")) ||
-      (route === "#files" && link.textContent.includes("ファイル"))
+      (route === "#notices" && link.getAttribute("href") === "#notices") ||
+      (route === "#support" && link.getAttribute("href") === "#support") ||
+      (route === "#status" && link.getAttribute("href") === "#status") ||
+      (route === "#files" && link.getAttribute("href") === "#files")
     ) {
       link.classList.add("active");
     }
