@@ -11,12 +11,59 @@ body {
   color: #1f2937;
 }
 
+/* =========================
+   ログイン画面
+========================= */
+
+.login-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  width: 320px;
+}
+
+.login-box h2 {
+  margin-bottom: 15px;
+}
+
+.login-box select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.login-box button {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #1d4ed8;
+}
+
+/* =========================
+   layout
+========================= */
+
 .layout {
   display: flex;
   min-height: 100vh;
 }
-
-/* sidebar */
 
 .sidebar {
   width: 260px;
@@ -46,12 +93,9 @@ body {
 
 .sidebar nav a {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
   padding: 10px;
   border-radius: 8px;
-
   color: #d1d5db;
   text-decoration: none;
 }
@@ -65,51 +109,17 @@ body {
   color: white;
 }
 
-/* badge */
-
 .badge {
   background: #ef4444;
-  color: white;
-  font-size: 12px;
   padding: 2px 8px;
   border-radius: 999px;
+  font-size: 12px;
 }
-
-/* content */
 
 .content {
   flex: 1;
   padding: 40px;
 }
-
-h1 {
-  margin-bottom: 15px;
-}
-
-/* フィルタ */
-
-.filter-bar {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid #ddd;
-  background: white;
-  cursor: pointer;
-}
-
-.filter-btn.active {
-  background: #2563eb;
-  color: white;
-  border-color: #2563eb;
-}
-
-/* cards */
 
 .notice-grid {
   display: grid;
@@ -124,18 +134,21 @@ h1 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.filter-bar {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 8px;
 }
 
-button {
+.filter-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-btn.active {
   background: #2563eb;
   color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 8px;
 }
