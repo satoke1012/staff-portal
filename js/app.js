@@ -18,6 +18,33 @@ function getUser() {
 }
 
 /* =========================
+   お知らせデータ（localStorage）
+========================= */
+
+function getNotices() {
+  return JSON.parse(localStorage.getItem("notices") || "[]");
+}
+
+function saveNotices(data) {
+  localStorage.setItem("notices", JSON.stringify(data));
+}
+
+/* 初期データ投入 */
+function initNotices() {
+  if (localStorage.getItem("notices")) return;
+
+  const base = [
+    { id: 1, title: "本部メンテナンス", text: "22:00〜", facility: "hq" },
+    { id: 2, title: "施設A連絡", text: "提出期限", facility: "a" },
+    { id: 3, title: "施設B連絡", text: "備品更新", facility: "b" }
+  ];
+
+  saveNotices(base);
+}
+
+initNotices();
+
+/* =========================
    ログイン
 ========================= */
 
@@ -41,7 +68,6 @@ function showLogin() {
 
 function login() {
   const facility = document.getElementById("facility").value;
-
   localStorage.setItem("user", JSON.stringify({ facility }));
   location.reload();
 }
@@ -59,12 +85,16 @@ function showApp() {
       <aside class="sidebar">
         <div class="logo">
           <h2>Staff Portal</h2>
-          <span>${user.facility === "hq" ? "本部（全権限）" : "施設ユーザー"}</span>
+          <span>${user.facility === "hq" ? "本部（管理者）" : "施設ユーザー"}</span>
         </div>
 
         <nav>
-          <a href="#home" class="active">ホーム</a>
+          <a href="#home">ホーム</a>
           <a href="#notices">お知らせ</a>
+          ${user.facility === "hq"
+            ? `<a href="#admin">管理画面</a>`
+            : ""
+          }
           <a href="#logout" onclick="logout()">ログアウト</a>
         </nav>
       </aside>
@@ -81,24 +111,12 @@ function showApp() {
 }
 
 /* =========================
-   データ
-========================= */
-
-const notices = [
-  { title: "本部メンテナンス", text: "22:00〜", facility: "hq" },
-  { title: "施設A連絡", text: "提出期限", facility: "a" },
-  { title: "施設B連絡", text: "備品更新", facility: "b" },
-  { title: "全体通達", text: "重要通知", facility: "hq" }
-];
-
-/* =========================
    ルーティング
 ========================= */
 
 function render() {
   const content = document.querySelector(".content");
   const route = location.hash || "#home";
-
   const user = getUser();
 
   if (route === "#logout") {
@@ -108,7 +126,18 @@ function render() {
 
   if (route === "#notices") {
     content.innerHTML = renderNotices(user);
-  } else {
+  }
+
+  else if (route === "#admin") {
+    if (user.facility !== "hq") {
+      content.innerHTML = `<h1>権限がありません</h1>`;
+      return;
+    }
+
+    content.innerHTML = renderAdmin();
+  }
+
+  else {
     content.innerHTML = `
       <h1>ホーム</h1>
       <p>ようこそ ${user.facility}</p>
@@ -117,13 +146,16 @@ function render() {
 }
 
 /* =========================
-   権限制御コア
+   お知らせ（施設制御）
 ========================= */
 
 function renderNotices(user) {
+  const notices = getNotices();
 
   const filtered = notices.filter(n => {
-    return user.facility === "hq" ? true : n.facility === user.facility;
+    return user.facility === "hq"
+      ? true
+      : n.facility === user.facility;
   });
 
   return `
@@ -138,6 +170,51 @@ function renderNotices(user) {
       `).join("")}
     </div>
   `;
+}
+
+/* =========================
+   管理画面
+========================= */
+
+function renderAdmin() {
+  return `
+    <h1>管理画面（本部専用）</h1>
+
+    <div class="admin-box">
+      <input id="title" placeholder="タイトル">
+      <input id="text" placeholder="内容">
+
+      <select id="facility">
+        <option value="hq">本部</option>
+        <option value="a">施設A</option>
+        <option value="b">施設B</option>
+      </select>
+
+      <button onclick="addNotice()">追加</button>
+    </div>
+  `;
+}
+
+/* 追加処理 */
+function addNotice() {
+  const title = document.getElementById("title").value;
+  const text = document.getElementById("text").value;
+  const facility = document.getElementById("facility").value;
+
+  const notices = getNotices();
+
+  notices.push({
+    id: Date.now(),
+    title,
+    text,
+    facility
+  });
+
+  saveNotices(notices);
+
+  alert("追加しました");
+  location.hash = "#notices";
+  render();
 }
 
 /* =========================
