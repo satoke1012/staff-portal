@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +10,6 @@ body {
   background: #f3f6fb;
   color: #1f2937;
 }
-
-/* layout */
 
 .layout {
   display: flex;
@@ -48,7 +47,7 @@ body {
 .sidebar nav a {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
 
   padding: 10px;
   border-radius: 8px;
@@ -68,31 +67,27 @@ body {
   color: white;
 }
 
+/* 🔴 バッジ */
+
+.badge {
+  background: #ef4444;
+  color: white;
+
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
 /* content */
 
 .content {
   flex: 1;
   padding: 40px;
-
-  /* 🔥 アニメ追加 */
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-/* フェードアウト */
-.content.fade-out {
-  opacity: 0;
-  transform: translateY(6px);
+h1 {
+  margin-bottom: 20px;
 }
-
-/* フェードイン準備 */
-.content.fade-in {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-
-/* cards */
 
 .notice-grid {
   display: grid;
@@ -107,14 +102,10 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* form */
-
 input, textarea {
   width: 100%;
   padding: 10px;
-  margin-top: 8px;
-  margin-bottom: 10px;
-
+  margin: 8px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
 }
@@ -123,10 +114,8 @@ button {
   background: #2563eb;
   color: white;
   border: none;
-
   padding: 10px 14px;
   border-radius: 8px;
-
   cursor: pointer;
 }
 
