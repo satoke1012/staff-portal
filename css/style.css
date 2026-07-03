@@ -11,9 +11,7 @@ body {
   color: #1f2937;
 }
 
-/* =========================
-   ログイン画面
-========================= */
+/* login */
 
 .login-screen {
   height: 100vh;
@@ -26,8 +24,8 @@ body {
   background: white;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   width: 320px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
 }
 
 .login-box h2 {
@@ -38,17 +36,17 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border-radius: 8px;
   border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .login-box button {
   width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
   background: #2563eb;
   color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -56,9 +54,7 @@ body {
   background: #1d4ed8;
 }
 
-/* =========================
-   layout
-========================= */
+/* layout */
 
 .layout {
   display: flex;
@@ -109,17 +105,12 @@ body {
   color: white;
 }
 
-.badge {
-  background: #ef4444;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-size: 12px;
-}
-
 .content {
   flex: 1;
   padding: 40px;
 }
+
+/* cards */
 
 .notice-grid {
   display: grid;
@@ -132,23 +123,4 @@ body {
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.filter-bar {
-  margin-bottom: 15px;
-  display: flex;
-  gap: 8px;
-}
-
-.filter-btn {
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid #ddd;
-  background: white;
-  cursor: pointer;
-}
-
-.filter-btn.active {
-  background: #2563eb;
-  color: white;
 }
