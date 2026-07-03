@@ -11,33 +11,6 @@ body {
   color: #1f2937;
 }
 
-/* login */
-
-.login-screen {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-box {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 320px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
-
-.login-box select,
-.login-box input,
-.login-box textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
 /* layout */
 
 .layout {
@@ -103,16 +76,43 @@ body {
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  position: relative;
 }
 
-/* admin */
+/* admin buttons */
 
-.admin-box {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+.admin-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-edit {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+}
+
+/* form */
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 button {
