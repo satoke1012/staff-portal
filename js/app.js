@@ -4,50 +4,114 @@ document.addEventListener("DOMContentLoaded", () => {
   render();
 });
 
+/* =========================
+   🧾 データ（JSON化部分）
+========================= */
+
+const notices = [
+  {
+    title: "システムメンテナンス",
+    text: "本日22:00〜実施予定",
+    type: "high"
+  },
+  {
+    title: "提出期限",
+    text: "明日までに対応してください",
+    type: "medium"
+  },
+  {
+    title: "備品申請",
+    text: "新規ルールが追加されました",
+    type: "low"
+  }
+];
+
+/* =========================
+   ルーティング
+========================= */
+
 function render() {
   const content = document.querySelector(".content");
   const route = location.hash || "#home";
 
-  content.classList.add("fade-out");
+  let html = "";
 
-  setTimeout(() => {
+  switch (route) {
 
-    let html = "";
+    case "#notices":
+      html = `
+        <h1>お知らせ</h1>
 
-    switch (route) {
+        <div class="notice-grid">
+          ${notices.map(n => `
+            <div class="notice-card ${n.type}">
+              <h3>${n.title}</h3>
+              <p>${n.text}</p>
+            </div>
+          `).join("")}
+        </div>
+      `;
+      break;
 
-      case "#notices":
-        html = `<h1>お知らせ</h1>`;
-        break;
+    case "#support":
+      html = `
+        <h1>問い合わせ</h1>
 
-      case "#support":
-        html = `<h1>問い合わせ</h1>`;
-        break;
+        <input placeholder="名前">
+        <input placeholder="件名">
+        <textarea placeholder="内容"></textarea>
+        <button>送信</button>
+      `;
+      break;
 
-      case "#status":
-        html = `<h1>対応状況</h1>`;
-        break;
+    case "#status":
+      html = `
+        <h1>対応状況</h1>
 
-      case "#files":
-        html = `<h1>ファイル共有</h1>`;
-        break;
+        <div class="notice-grid">
+          <div class="notice-card">対応中</div>
+          <div class="notice-card">未対応</div>
+          <div class="notice-card">完了</div>
+        </div>
+      `;
+      break;
 
-      default:
-        html = `<h1>ホーム</h1>`;
-        break;
-    }
+    case "#files":
+      html = `
+        <h1>ファイル共有</h1>
 
-    content.innerHTML = html;
+        <div class="notice-grid">
+          <div class="notice-card">月次報告書.xlsx</div>
+          <div class="notice-card">マニュアル.pdf</div>
+        </div>
+      `;
+      break;
 
-    content.classList.remove("fade-out");
+    default:
+      html = `
+        <h1>ホーム</h1>
+        <p>Staff Portalへようこそ</p>
 
-    setActive(route);
+        <div class="notice-card">
+          ダッシュボード
+        </div>
+      `;
+      break;
+  }
 
-  }, 150);
+  content.innerHTML = html;
+  setActive(route);
 }
+
+/* =========================
+   active管理
+========================= */
 
 function setActive(route) {
   document.querySelectorAll(".sidebar nav a").forEach(a => {
-    a.classList.toggle("active", a.getAttribute("href") === route);
+    a.classList.remove("active");
+    if (a.getAttribute("href") === route) {
+      a.classList.add("active");
+    }
   });
 }
