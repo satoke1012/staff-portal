@@ -54,8 +54,6 @@ body {
 
   color: #d1d5db;
   text-decoration: none;
-
-  transition: 0.2s;
 }
 
 .sidebar nav a:hover {
@@ -67,12 +65,11 @@ body {
   color: white;
 }
 
-/* 🔴 バッジ */
+/* badge */
 
 .badge {
   background: #ef4444;
   color: white;
-
   font-size: 12px;
   padding: 2px 8px;
   border-radius: 999px;
@@ -86,8 +83,33 @@ body {
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
+
+/* フィルタ */
+
+.filter-bar {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+/* cards */
 
 .notice-grid {
   display: grid;
@@ -116,9 +138,4 @@ button {
   border: none;
   padding: 10px 14px;
   border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #1d4ed8;
 }
