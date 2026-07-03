@@ -18,7 +18,7 @@ function getUser() {
 }
 
 /* =========================
-   お知らせデータ（localStorage）
+   データ管理
 ========================= */
 
 function getNotices() {
@@ -29,20 +29,16 @@ function saveNotices(data) {
   localStorage.setItem("notices", JSON.stringify(data));
 }
 
-/* 初期データ投入 */
-function initNotices() {
-  if (localStorage.getItem("notices")) return;
-
-  const base = [
-    { id: 1, title: "本部メンテナンス", text: "22:00〜", facility: "hq" },
-    { id: 2, title: "施設A連絡", text: "提出期限", facility: "a" },
-    { id: 3, title: "施設B連絡", text: "備品更新", facility: "b" }
-  ];
-
-  saveNotices(base);
-}
-
-initNotices();
+/* 初期化 */
+(function init() {
+  if (!localStorage.getItem("notices")) {
+    saveNotices([
+      { id: 1, title: "本部連絡", text: "メンテ予定", facility: "hq" },
+      { id: 2, title: "施設A", text: "提出期限", facility: "a" },
+      { id: 3, title: "施設B", text: "備品更新", facility: "b" }
+    ]);
+  }
+})();
 
 /* =========================
    ログイン
@@ -130,10 +126,9 @@ function render() {
 
   else if (route === "#admin") {
     if (user.facility !== "hq") {
-      content.innerHTML = `<h1>権限がありません</h1>`;
+      content.innerHTML = "<h1>権限がありません</h1>";
       return;
     }
-
     content.innerHTML = renderAdmin();
   }
 
@@ -146,17 +141,15 @@ function render() {
 }
 
 /* =========================
-   お知らせ（施設制御）
+   お知らせ表示
 ========================= */
 
 function renderNotices(user) {
   const notices = getNotices();
 
-  const filtered = notices.filter(n => {
-    return user.facility === "hq"
-      ? true
-      : n.facility === user.facility;
-  });
+  const filtered = notices.filter(n =>
+    user.facility === "hq" ? true : n.facility === user.facility
+  );
 
   return `
     <h1>お知らせ</h1>
@@ -166,6 +159,13 @@ function renderNotices(user) {
         <div class="notice-card">
           <h3>${n.title}</h3>
           <p>${n.text}</p>
+
+          ${user.facility === "hq" ? `
+            <div class="admin-actions">
+              <button class="btn btn-edit" onclick="editNotice(${n.id})">編集</button>
+              <button class="btn btn-delete" onclick="deleteNotice(${n.id})">削除</button>
+            </div>
+          ` : ""}
         </div>
       `).join("")}
     </div>
@@ -173,47 +173,69 @@ function renderNotices(user) {
 }
 
 /* =========================
-   管理画面
+   管理画面（追加）
 ========================= */
 
 function renderAdmin() {
   return `
-    <h1>管理画面（本部専用）</h1>
+    <h1>管理画面</h1>
 
-    <div class="admin-box">
-      <input id="title" placeholder="タイトル">
-      <input id="text" placeholder="内容">
+    <input id="title" placeholder="タイトル">
+    <input id="text" placeholder="内容">
 
-      <select id="facility">
-        <option value="hq">本部</option>
-        <option value="a">施設A</option>
-        <option value="b">施設B</option>
-      </select>
+    <select id="facility">
+      <option value="hq">本部</option>
+      <option value="a">施設A</option>
+      <option value="b">施設B</option>
+    </select>
 
-      <button onclick="addNotice()">追加</button>
-    </div>
+    <button onclick="addNotice()">追加</button>
   `;
 }
 
-/* 追加処理 */
 function addNotice() {
-  const title = document.getElementById("title").value;
-  const text = document.getElementById("text").value;
-  const facility = document.getElementById("facility").value;
-
   const notices = getNotices();
 
   notices.push({
     id: Date.now(),
-    title,
-    text,
-    facility
+    title: document.getElementById("title").value,
+    text: document.getElementById("text").value,
+    facility: document.getElementById("facility").value
   });
 
   saveNotices(notices);
-
-  alert("追加しました");
   location.hash = "#notices";
+  render();
+}
+
+/* =========================
+   編集
+========================= */
+
+function editNotice(id) {
+  const notices = getNotices();
+  const target = notices.find(n => n.id === id);
+
+  const newTitle = prompt("タイトル", target.title);
+  const newText = prompt("内容", target.text);
+
+  target.title = newTitle;
+  target.text = newText;
+
+  saveNotices(notices);
+  render();
+}
+
+/* =========================
+   削除
+========================= */
+
+function deleteNotice(id) {
+  if (!confirm("削除しますか？")) return;
+
+  const notices = getNotices().filter(n => n.id !== id);
+  saveNotices(notices);
+
   render();
 }
 
