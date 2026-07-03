@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   ユーザー取得
+   ユーザー
 ========================= */
 
 function getUser() {
@@ -18,7 +18,7 @@ function getUser() {
 }
 
 /* =========================
-   ログイン画面
+   ログイン
 ========================= */
 
 function showLogin() {
@@ -42,26 +42,24 @@ function showLogin() {
 function login() {
   const facility = document.getElementById("facility").value;
 
-  const user = {
-    facility
-  };
-
-  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("user", JSON.stringify({ facility }));
   location.reload();
 }
 
 /* =========================
-   アプリ本体
+   アプリ起動
 ========================= */
 
 function showApp() {
+  const user = getUser();
+
   document.body.innerHTML = `
     <div class="layout">
 
       <aside class="sidebar">
         <div class="logo">
           <h2>Staff Portal</h2>
-          <span>Facility: ${getUser().facility}</span>
+          <span>${user.facility === "hq" ? "本部（全権限）" : "施設ユーザー"}</span>
         </div>
 
         <nav>
@@ -83,6 +81,17 @@ function showApp() {
 }
 
 /* =========================
+   データ
+========================= */
+
+const notices = [
+  { title: "本部メンテナンス", text: "22:00〜", facility: "hq" },
+  { title: "施設A連絡", text: "提出期限", facility: "a" },
+  { title: "施設B連絡", text: "備品更新", facility: "b" },
+  { title: "全体通達", text: "重要通知", facility: "hq" }
+];
+
+/* =========================
    ルーティング
 ========================= */
 
@@ -98,7 +107,7 @@ function render() {
   }
 
   if (route === "#notices") {
-    content.innerHTML = renderNotices(user.facility);
+    content.innerHTML = renderNotices(user);
   } else {
     content.innerHTML = `
       <h1>ホーム</h1>
@@ -108,23 +117,14 @@ function render() {
 }
 
 /* =========================
-   データ
+   権限制御コア
 ========================= */
 
-const notices = [
-  { title: "本部メンテ", text: "22:00〜", facility: "hq" },
-  { title: "施設A連絡", text: "提出期限", facility: "a" },
-  { title: "施設B連絡", text: "備品更新", facility: "b" },
-];
+function renderNotices(user) {
 
-/* =========================
-   フィルタ（施設制御）
-========================= */
-
-function renderNotices(facility) {
-  const filtered = notices.filter(n =>
-    facility === "hq" ? true : n.facility === facility
-  );
+  const filtered = notices.filter(n => {
+    return user.facility === "hq" ? true : n.facility === user.facility;
+  });
 
   return `
     <h1>お知らせ</h1>
