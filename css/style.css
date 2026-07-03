@@ -28,30 +28,14 @@ body {
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
 }
 
-.login-box h2 {
-  margin-bottom: 15px;
-}
-
-.login-box select {
+.login-box select,
+.login-box input,
+.login-box textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
-}
-
-.login-box button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  cursor: pointer;
-}
-
-.login-box button:hover {
-  background: #1d4ed8;
 }
 
 /* layout */
@@ -96,10 +80,6 @@ body {
   text-decoration: none;
 }
 
-.sidebar nav a:hover {
-  background: #1f2937;
-}
-
 .sidebar nav a.active {
   background: #2563eb;
   color: white;
@@ -123,4 +103,27 @@ body {
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* admin */
+
+.admin-box {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
 }
